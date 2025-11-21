@@ -45,6 +45,12 @@ Non-alphabet characters can be:
 
 ---
 
+## Live Preview 
+
+https://sct-cs-1.vercel.app/
+
+---
+
 ## ✨ Author
 
 **Vempali Hrishita**  
