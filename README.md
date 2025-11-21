@@ -13,7 +13,7 @@ All processing happens **completely inside the browser**, no data is sent, store
 - Choose custom shift values (positive or negative)
 - Option to preserve case (Upper/Lower)
 - Option to preserve non-alphabet characters
-- Instant output — no page reloads
+- Instant output
 - Copy result with one click
 - Keyboard shortcuts:
   - **Ctrl + Enter** → Encrypt
