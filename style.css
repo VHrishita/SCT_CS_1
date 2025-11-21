@@ -1,0 +1,189 @@
+/* Dark Mode Caesar Cipher - style.css */
+
+/* Page reset */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, .page { height: 100%; }
+
+/* Background and font */
+body {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: radial-gradient(circle at 10% 10%, #08121a 0%, #041018 25%, #00040a 100%);
+  color: #dbeafe;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 32px;
+}
+
+/* Page layout */
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header .title {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #17d394;
+    margin-bottom: 5px;
+}
+
+.header .subtitle {
+    font-size: 1.1rem;
+    color: #9bb0c2;
+    margin-top: 0;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
+
+.logo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,255,200,0.06);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+h1 {
+  font-size: 22px;
+  color: #7fffd4;
+  letter-spacing: 0.6px;
+}
+
+.tag {
+  color: #9fb4c6;
+  font-size: 13px;
+  margin-left: 56px;
+}
+
+/* Main card */
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 40px rgba(2,12,18,0.7);
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+.label {
+  display: block;
+  font-size: 13px;
+  color: #9fb4c6;
+  margin-bottom: 6px;
+}
+
+/* Inputs */
+textarea, input[type="number"], input[type="text"] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.04);
+  background: rgba(6,10,14,0.6);
+  color: #e6f7ff;
+  resize: vertical;
+  font-size: 14px;
+  outline: none;
+  transition: box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+textarea:focus, input:focus {
+  box-shadow: 0 6px 22px rgba(0,255,200,0.06), 0 0 0 4px rgba(0,255,200,0.02);
+  border-color: rgba(0,255,200,0.18);
+}
+
+/* Row & columns */
+.row {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.col { flex: 1; min-width: 160px; }
+
+.col.full { flex-basis: 100%; }
+
+.col.small { flex: 0.8; }
+
+.right { display:flex; justify-content:flex-end; align-items:center; }
+
+/* Buttons */
+.btn {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.04);
+  background: transparent;
+  color: #cfeff2;
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: 6px;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.btn:hover { transform: translateY(-2px); }
+
+.btn.primary {
+  background: linear-gradient(90deg, rgba(0,255,200,0.12), rgba(0,200,255,0.08));
+  border: 1px solid rgba(0,255,200,0.18);
+  color: #d9fff3;
+  box-shadow: 0 8px 20px rgba(0,255,200,0.04);
+}
+
+.btn.ghost {
+  background: rgba(255,255,255,0.02);
+}
+
+/* small helpers */
+.small { font-size: 13px; color: #9fb4c6; }
+.disclaimer { margin-top: 14px; font-size: 13px; color: #89a6b6; }
+
+/* footer */
+.footer {
+  text-align: center;
+  color: #8aa3b4;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+/* responsive */
+@media (max-width: 640px) {
+  .row { flex-direction: column; }
+  .tag { margin-left: 0; }
+}
+
+/* Make page stretch full height */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+
+.page {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 12px 0;
+    background: rgba(0, 0, 0, 0.4); 
+    backdrop-filter: blur(4px);      
+    color: #949090;
+    font-size: 14px;
+}
+

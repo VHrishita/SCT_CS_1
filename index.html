@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Caesar Cipher — Encrypt & Decrypt</title>
+
+  <!-- favicon (optional) -->
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <!-- main stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+  <h1 class="title">Caesar Cipher</h1>
+  <p class="subtitle">Encrypt & Decrypt</p>
+  <p class="subtitle">Shift your message. Guard your secrets.</p>
+
+</header>
+
+
+    <main class="card">
+      <label class="label" for="message">Message</label>
+      <textarea id="message" rows="4" placeholder="Type your message here..."></textarea>
+
+      <div class="row">
+        <div class="col">
+          <label class="label" for="shift">Shift Value</label>
+          <input id="shift" type="number" value="3" min="-1000" max="1000" />
+        </div>
+
+        <div class="col small">
+          <label class="label">&nbsp;</label>
+          <div class="controls">
+            <button id="encryptBtn" class="btn primary">Encrypt</button>
+            <button id="decryptBtn" class="btn">Decrypt</button>
+            <button id="copyBtn" class="btn ghost" title="Copy result">Copy</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col full">
+          <label class="label" for="result">Result</label>
+          <textarea id="result" rows="4" readonly placeholder="Result will appear here..."></textarea>
+        </div>
+      </div>
+
+      <div class="row small">
+        <div class="col">
+          <label class="label" for="keepcase">
+            <input id="keepcase" type="checkbox" checked />
+            Preserve case (letters keep upper/lower)
+          </label>
+        </div>
+        <div class="col right">
+          <label class="label" for="preserve-nonalpha">
+            <input id="preserve-nonalpha" type="checkbox" checked />
+            Preserve non-alpha characters
+          </label>
+        </div>
+      </div>
+
+      <p class="disclaimer">This runs entirely in your browser — no data is sent or stored.</p>
+    </main>
+
+    <footer class="footer">
+      <p>© 2025 Vempali Hrishita. All rights reserved.</p>
+      <p>Disclaimer: This Caesar Cipher tool runs entirely in your browser. No messages or inputs are stored, logged, or sent anywhere.
+</a></p>
+    </footer>
+  </div>
+
+  <script>
+    // Caesar cipher function
+    function caesarCipher(text, shift, options = {}) {
+      const { preserveCase = true, preserveNonAlpha = true } = options;
+      // normalize large shifts
+      shift = ((shift % 26) + 26) % 26;
+
+      let out = "";
+
+      for (let i = 0; i < text.length; i++) {
+        const ch = text[i];
+
+        if (/[A-Za-z]/.test(ch)) {
+          const isUpper = ch === ch.toUpperCase();
+          const base = isUpper ? 65 : 97;
+          const code = ch.charCodeAt(0) - base;
+          const shifted = (code + shift) % 26;
+          const newChar = String.fromCharCode(base + shifted);
+          out += preserveCase ? (isUpper ? newChar : newChar.toLowerCase()) : newChar;
+        } else {
+          out += preserveNonAlpha ? ch : "";
+        }
+      }
+
+      return out;
+    }
+
+    // DOM elements
+    const msgEl = document.getElementById("message");
+    const shiftEl = document.getElementById("shift");
+    const resultEl = document.getElementById("result");
+    const encryptBtn = document.getElementById("encryptBtn");
+    const decryptBtn = document.getElementById("decryptBtn");
+    const copyBtn = document.getElementById("copyBtn");
+    const keepCaseEl = document.getElementById("keepcase");
+    const preserveNonAlphaEl = document.getElementById("preserve-nonalpha");
+
+    function parseShift() {
+      const val = parseInt(shiftEl.value, 10);
+      return Number.isNaN(val) ? 0 : val;
+    }
+
+    function runEncryption(isEncrypt = true) {
+      const text = msgEl.value;
+      let shift = parseShift();
+      if (!isEncrypt) shift = -shift;
+
+      const options = {
+        preserveCase: keepCaseEl.checked,
+        preserveNonAlpha: preserveNonAlphaEl.checked
+      };
+
+      const output = caesarCipher(text, shift, options);
+      resultEl.value = output;
+    }
+
+    encryptBtn.addEventListener("click", () => runEncryption(true));
+    decryptBtn.addEventListener("click", () => runEncryption(false));
+
+    copyBtn.addEventListener("click", () => {
+      resultEl.select();
+      try {
+        document.execCommand("copy");
+        copyBtn.innerText = "Copied ✓";
+        setTimeout(() => (copyBtn.innerText = "Copy"), 1400);
+      } catch (e) {
+        copyBtn.innerText = "Copy failed";
+        setTimeout(() => (copyBtn.innerText = "Copy"), 1400);
+      }
+    });
+
+    // Keyboard shortcuts:
+    // Ctrl+Enter -> Encrypt
+    // Ctrl+Shift+Enter -> Decrypt
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey && e.key === "Enter") {
+        if (e.shiftKey) runEncryption(false);
+        else runEncryption(true);
+      }
+    });
+
+    // Prefill example
+    msgEl.placeholder = "Example: Attack at dawn! 123";
+  </script>
+
+  
+</body>
+</html>
