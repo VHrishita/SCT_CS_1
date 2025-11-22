@@ -69,7 +69,6 @@
   <script>
     function caesarCipher(text, shift, options = {}) {
       const { preserveCase = true, preserveNonAlpha = true } = options;
-      // normalize large shifts
       shift = ((shift % 26) + 26) % 26;
 
       let out = "";
