@@ -105,21 +105,17 @@
       const val = parseInt(shiftEl.value, 10);
       return Number.isNaN(val) ? 0 : val;
     }
-
     function runEncryption(isEncrypt = true) {
       const text = msgEl.value;
       let shift = parseShift();
       if (!isEncrypt) shift = -shift;
-
       const options = {
         preserveCase: keepCaseEl.checked,
         preserveNonAlpha: preserveNonAlphaEl.checked
       };
-
       const output = caesarCipher(text, shift, options);
       resultEl.value = output;
     }
-
     encryptBtn.addEventListener("click", () => runEncryption(true));
     decryptBtn.addEventListener("click", () => runEncryption(false));
 
@@ -134,10 +130,6 @@
         setTimeout(() => (copyBtn.innerText = "Copy"), 1400);
       }
     });
-
-    // Keyboard shortcuts:
-    // Ctrl+Enter -> Encrypt
-    // Ctrl+Shift+Enter -> Decrypt
     document.addEventListener("keydown", (e) => {
       if (e.ctrlKey && e.key === "Enter") {
         if (e.shiftKey) runEncryption(false);
